@@ -1,4 +1,4 @@
-name: Git AI (reusable)
+name: Git AI
 
 on:
   workflow_call: {}
