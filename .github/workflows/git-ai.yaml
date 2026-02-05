@@ -1,0 +1,33 @@
+name: Git AI (reusable)
+
+on:
+  workflow_call: {}
+
+jobs:
+  git-ai:
+    # Only run when the PR was actually merged (not just closed)
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+      # Safe default so git-ai can see commit history if needed
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install git-ai
+        run: |
+          curl -fsSL https://usegitai.com/install.sh | bash
+          echo "$HOME/.git-ai/bin" >> $GITHUB_PATH
+
+      - name: Run git-ai
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git-ai ci github run
