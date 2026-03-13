@@ -1,0 +1,39 @@
+name: Query MRL Claims (January 2026)
+
+on:
+  workflow_dispatch:
+    inputs:
+      model_name:
+        description: "LookML model name (leave blank for auto-discovery)"
+        required: false
+        default: ""
+      explore_name:
+        description: "LookML explore name (leave blank for auto-discovery)"
+        required: false
+        default: ""
+
+jobs:
+  query-claims:
+    name: Query MRL accepted claims
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Looker claims query
+        env:
+          LOOKERSDK_BASE_URL: ${{ secrets.LOOKER_BASE_URL }}
+          LOOKERSDK_CLIENT_ID: ${{ secrets.LOOKER_CLIENT_ID }}
+          LOOKERSDK_CLIENT_SECRET: ${{ secrets.LOOKER_CLIENT_SECRET }}
+          MODEL_NAME: ${{ inputs.model_name }}
+          EXPLORE_NAME: ${{ inputs.explore_name }}
+        run: python scripts/query_mrl_claims.py
