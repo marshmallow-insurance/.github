@@ -20,6 +20,8 @@ jobs:
           fetch-depth: 0
 
       - name: Install git-ai
+        env:
+          GIT_AI_RELEASE_TAG: v1.1.18
         run: |
           curl -fsSL https://usegitai.com/install.sh | bash
           echo "$HOME/.git-ai/bin" >> $GITHUB_PATH
