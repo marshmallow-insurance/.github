@@ -1,0 +1,23 @@
+.github/workflows/git-ai.yaml
+  7ea44f7a73c1e6cf 23-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.4",
+  "base_commit_sha": "580616d35397ed97b53fe77fd71326688ed65e22",
+  "prompts": {
+    "7ea44f7a73c1e6cf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c7661ddb-2cfe-4cee-b840-4b87baa329ff",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Jeremy Marer <jeremy.marer@marshmallow.co>",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 0,
+      "accepted_lines": 2,
+      "overriden_lines": 0
+    }
+  }
+}
